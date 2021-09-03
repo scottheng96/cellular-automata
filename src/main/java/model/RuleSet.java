@@ -5,10 +5,12 @@ import java.util.Set;
 
 public class RuleSet {
     Set<Rule> rules;
-    Set<Integer> states;
 
-    public RuleSet(Set<Rule> rules, Set<Integer> states) {
+    public RuleSet(Set<Rule> rules) {
         this.rules = rules;
-        this.states = states;
+    }
+
+    public Set<Rule> getRules() {
+        return this.rules;
     }
 }
