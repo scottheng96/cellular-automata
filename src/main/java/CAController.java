@@ -16,6 +16,7 @@ import java.awt.*;
 import java.util.*;
 
 public class CAController extends TimerTask {
+    Properties prop;
     SquareGrid myModel;
     BaseFrame myView;
     Map<Cell, Square> myModelViewMap;
@@ -25,17 +26,7 @@ public class CAController extends TimerTask {
 
     public CAController(int i) {
 
-        Properties prop = new Properties();
-        String propFileName = "config.properties";
-
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
-        try {
-            prop.load(inputStream);
-        } catch (Exception e) {
-            System.out.println(e.toString());
-        }
-
-        System.out.println(prop.getProperty("TEST_STRING"));
+        loadProperties();
 
         //temp variables
         int cellsPerRow = 50;
@@ -81,6 +72,18 @@ public class CAController extends TimerTask {
         for (Cell cell: myModelViewMap.keySet()) {
             Square mySquare = myModelViewMap.get(cell);
             mySquare.updateSquare(stateColorMap.get(cell.getState()));
+        }
+    }
+
+    private void loadProperties() {
+        prop = new Properties();
+        String propFileName = "config.properties";
+
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
+        try {
+            prop.load(inputStream);
+        } catch (Exception e) {
+            System.out.println(e.toString());
         }
     }
 
