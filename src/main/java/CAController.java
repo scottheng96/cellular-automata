@@ -9,6 +9,8 @@ import model.RuleSet;
 import view.BaseFrame;
 import view.shapes.Square;
 
+import java.io.InputStream;
+import java.util.Properties;
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
@@ -17,14 +19,31 @@ public class CAController extends TimerTask {
     SquareGrid myModel;
     BaseFrame myView;
     Map<Cell, Square> myModelViewMap;
+    Map<Cell.State, Color> stateColorMap;
 
     int cellSize = 10;
 
-    public CAController(String visualizationName) {
+    public CAController(int i) {
+
+        Properties prop = new Properties();
+        String propFileName = "config.properties";
+
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
+        try {
+            prop.load(inputStream);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+        }
+
+        System.out.println(prop.getProperty("TEST_STRING"));
+
         //temp variables
         int cellsPerRow = 50;
         int cellsPerColumn = 50;
 
+        stateColorMap = new HashMap<Cell.State, Color>();
+        stateColorMap.put(Cell.State.LIVE, Color.black);
+        stateColorMap.put(Cell.State.DEAD, Color.white);
 
         Rule deadWithNeighboursRule = new DeadWithNeighboursRule();
         Rule lackOfNeighboursRule = new LackOfNeighboursRule();
@@ -58,11 +77,10 @@ public class CAController extends TimerTask {
         return viewModelMap;
     }
 
-    public void updateViewModelMap() {
+    public void updateView() {
         for (Cell cell: myModelViewMap.keySet()) {
             Square mySquare = myModelViewMap.get(cell);
-            mySquare.updateSquare(cell.getState());
-            myModelViewMap.put(cell, mySquare);
+            mySquare.updateSquare(stateColorMap.get(cell.getState()));
         }
     }
 
@@ -71,9 +89,10 @@ public class CAController extends TimerTask {
 
         //update the model
         myModel.updateGrid();
-        updateViewModelMap();
+
         //update the view
-        // view is updated automatically
+        updateView();
+
         //show the frame
         myView.showFrame();
     }

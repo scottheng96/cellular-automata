@@ -18,8 +18,7 @@ public class Square {
         return this.square;
     }
 
-    public void updateSquare(Cell.State state) {
-        if (state== Cell.State.LIVE) square.setBackground(Color.blue);
-        else square.setBackground(Color.white);
+    public void updateSquare(Color color) {
+        square.setBackground(color);
     }
 }

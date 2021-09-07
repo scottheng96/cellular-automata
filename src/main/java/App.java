@@ -17,7 +17,7 @@ public class App {
     public static void main(String[] args) {
         System.out.println("Hello World!");
 
-        CAController ca = new CAController("gameOfLife");
+        CAController ca = new CAController(0);
 
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(ca,3000,1000);
