@@ -3,7 +3,6 @@ package model.GameOfLife;
 import model.Rule;
 import model.RuleSet;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,6 +23,10 @@ public class SquareGrid {
         }
         //set neighbours for all the cells
         setNeighbours();
+    }
+
+    public Cell[][] getGrid() {
+        return grid;
     }
 
     public void updateGrid() {

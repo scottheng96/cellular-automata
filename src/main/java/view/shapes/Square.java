@@ -1,5 +1,7 @@
 package view.shapes;
 
+import model.GameOfLife.Cell;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -14,5 +16,10 @@ public class Square {
 
     public JPanel getSquare() {
         return this.square;
+    }
+
+    public void updateSquare(Cell.State state) {
+        if (state== Cell.State.LIVE) square.setBackground(Color.blue);
+        else square.setBackground(Color.white);
     }
 }

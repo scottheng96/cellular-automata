@@ -2,6 +2,7 @@ package model.GameOfLife;
 
 import model.RuleSet;
 
+import java.util.Random;
 import java.util.Set;
 
 public class Cell {
@@ -15,7 +16,11 @@ public class Cell {
 
     public Cell() {
         // default state is DEAD
-        this.state = State.DEAD;
+        Random rd = new Random();
+        float prob = rd.nextFloat();
+        if (prob < 0.8) this.state = State.DEAD;
+        else this.state = State.LIVE;
+
     }
 
     public Cell(State state) {
@@ -38,7 +43,4 @@ public class Cell {
         return this.state;
     }
 
-    public void updateCell(RuleSet rules) {
-
-    }
 }
