@@ -26,12 +26,11 @@ public class CAController extends TimerTask {
         int simulation = i;
         // load config
         loadProperties();
-        System.out.println(prop.getProperty("TEST_STRING"));
 
-        int appX = Integer.getInteger(prop.getProperty("squareGridX"));
-        int appY = Integer.getInteger(prop.getProperty("squareGridY"));
-        int cellsPerRow = Integer.getInteger(prop.getProperty("squareCellsPerRow"));
-        int cellsPerColumn = Integer.getInteger(prop.getProperty("squareCellsPerColumn"));
+        int appX = Integer.parseInt(prop.getProperty("squareGridX"));
+        int appY = Integer.parseInt(prop.getProperty("squareGridY"));
+        int cellsPerRow = Integer.parseInt(prop.getProperty("squareCellsPerRow"));
+        int cellsPerColumn = Integer.parseInt(prop.getProperty("squareCellsPerColumn"));
 
         // set rules
         RuleSetFactory myRuleSetFactory = new RuleSetFactory();
@@ -41,7 +40,7 @@ public class CAController extends TimerTask {
         myModel = new SquareGrid(cellsPerRow,cellsPerColumn,myRuleSet);
 
         // find colours for view
-        Map<Cell.State, Color> stateColourMap = stateColourMapUtil.getGameOfLifeColours();
+        stateColorMap = stateColourMapUtil.getGameOfLifeColours();
 
         // model to link to a map of view cells
         myModelViewMap = buildViewModelMap(myModel);
