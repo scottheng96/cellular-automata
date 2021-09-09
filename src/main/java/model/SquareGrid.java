@@ -1,5 +1,7 @@
-package model.GameOfLife;
+package model;
 
+import model.AbstractCell;
+import model.GameOfLife.Cell;
 import model.Rule;
 import model.RuleSet;
 
@@ -55,8 +57,7 @@ public class SquareGrid {
                         try {
                             if (current!= grid[iRow][iCol]) neighbours.add(grid[iRow][iCol]);
                         } catch (Exception e) {
-                            //TODO: better logs for out of bounds neighbours
-//                            System.out.println("Index out of bounds" );
+                            // out of bounds exception
                         }
                         current.setNeighbours(neighbours);
                     }

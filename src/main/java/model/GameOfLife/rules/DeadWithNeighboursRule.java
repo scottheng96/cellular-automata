@@ -1,5 +1,6 @@
 package model.GameOfLife.rules;
 
+import model.AbstractCell;
 import model.GameOfLife.Cell;
 import model.Rule;
 

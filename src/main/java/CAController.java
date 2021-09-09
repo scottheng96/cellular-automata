@@ -1,23 +1,19 @@
 import model.GameOfLife.Cell;
-import model.GameOfLife.SquareGrid;
-import model.GameOfLife.rules.DeadWithNeighboursRule;
-import model.GameOfLife.rules.LackOfNeighboursRule;
-import model.GameOfLife.rules.TooManyNeighboursRule;
-import model.GameOfLife.rules.TwoThreeNeighboursRule;
-import model.Rule;
+import model.SquareGrid;
 import model.RuleSet;
+import model.RuleSetFactory;
 import view.BaseFrame;
 import view.shapes.Square;
 
 import java.io.InputStream;
 import java.util.Properties;
-import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
 public class CAController extends TimerTask {
     Properties prop;
     SquareGrid myModel;
+
     BaseFrame myView;
     Map<Cell, Square> myModelViewMap;
     Map<Cell.State, Color> stateColorMap;
@@ -25,30 +21,27 @@ public class CAController extends TimerTask {
     int cellSize = 10;
 
     public CAController(int i) {
+        // i = 0 | Game Of Life
 
+        int simulation = i;
+        // load config
         loadProperties();
+        System.out.println(prop.getProperty("TEST_STRING"));
 
-        //temp variables
-        int cellsPerRow = 50;
-        int cellsPerColumn = 50;
+        int appX = Integer.getInteger(prop.getProperty("squareGridX"));
+        int appY = Integer.getInteger(prop.getProperty("squareGridY"));
+        int cellsPerRow = Integer.getInteger(prop.getProperty("squareCellsPerRow"));
+        int cellsPerColumn = Integer.getInteger(prop.getProperty("squareCellsPerColumn"));
 
-        stateColorMap = new HashMap<Cell.State, Color>();
-        stateColorMap.put(Cell.State.LIVE, Color.black);
-        stateColorMap.put(Cell.State.DEAD, Color.white);
+        // set rules
+        RuleSetFactory myRuleSetFactory = new RuleSetFactory();
+        RuleSet myRuleSet = myRuleSetFactory.getRuleSet(0);
 
-        Rule deadWithNeighboursRule = new DeadWithNeighboursRule();
-        Rule lackOfNeighboursRule = new LackOfNeighboursRule();
-        Rule tooManyNeighboursRule = new TooManyNeighboursRule();
-        Rule twoThreeNeighboursRule = new TwoThreeNeighboursRule();
-        Set<Rule> myRules = new HashSet<Rule>();
-        myRules.add(deadWithNeighboursRule);
-        myRules.add(lackOfNeighboursRule);
-        myRules.add(tooManyNeighboursRule);
-        myRules.add(twoThreeNeighboursRule);
-
-        RuleSet myRuleSet = new RuleSet(myRules);
-
+        // create model
         myModel = new SquareGrid(cellsPerRow,cellsPerColumn,myRuleSet);
+
+        // find colours for view
+        Map<Cell.State, Color> stateColourMap = stateColourMapUtil.getGameOfLifeColours();
 
         // model to link to a map of view cells
         myModelViewMap = buildViewModelMap(myModel);
