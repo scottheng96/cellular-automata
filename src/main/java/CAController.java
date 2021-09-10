@@ -1,4 +1,4 @@
-import model.GameOfLife.Cell;
+import model.Cell;
 import model.SquareGrid;
 import model.RuleSet;
 import model.RuleSetFactory;
@@ -16,17 +16,18 @@ public class CAController extends TimerTask {
 
     BaseFrame myView;
     Map<Cell, Square> myModelViewMap;
-    Map<Cell.State, Color> stateColorMap;
+    Map<Integer, Color> stateColorMap;
 
-    int cellSize = 10;
+    int cellSize = 20;
 
     public CAController(int i) {
         // i = 0 | Game Of Life
+        // i = 1 | War-Tor
 
-        int simulation = i;
         // load config
         loadProperties();
 
+        // TODO: use appX and appY in baseFrame configuration
         int appX = Integer.parseInt(prop.getProperty("squareGridX"));
         int appY = Integer.parseInt(prop.getProperty("squareGridY"));
         int cellsPerRow = Integer.parseInt(prop.getProperty("squareCellsPerRow"));
@@ -34,13 +35,13 @@ public class CAController extends TimerTask {
 
         // set rules
         RuleSetFactory myRuleSetFactory = new RuleSetFactory();
-        RuleSet myRuleSet = myRuleSetFactory.getRuleSet(0);
+        RuleSet myRuleSet = myRuleSetFactory.getRuleSet(i);
 
         // create model
         myModel = new SquareGrid(cellsPerRow,cellsPerColumn,myRuleSet);
 
         // find colours for view
-        stateColorMap = stateColourMapUtil.getGameOfLifeColours();
+        stateColorMap = stateColourMapUtil.getStateColourMap(i);
 
         // model to link to a map of view cells
         myModelViewMap = buildViewModelMap(myModel);
@@ -61,7 +62,7 @@ public class CAController extends TimerTask {
     }
 
     public void updateView() {
-        for (Cell cell: myModelViewMap.keySet()) {
+        for (Cell cell : myModelViewMap.keySet()) {
             Square mySquare = myModelViewMap.get(cell);
             mySquare.updateSquare(stateColorMap.get(cell.getState()));
         }
@@ -77,6 +78,18 @@ public class CAController extends TimerTask {
         } catch (Exception e) {
             System.out.println(e.toString());
         }
+    }
+
+    private int countAlive() {
+        int count = 0;
+        for (Cell[] row: myModel.getGrid()) {
+            for (Cell cell: row) {
+                if (cell.getState()==2) {
+                    count += 1;
+                }
+            }
+        }
+        return count;
     }
 
     public void run() {

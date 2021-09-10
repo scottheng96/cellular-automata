@@ -1,25 +1,21 @@
 package model.GameOfLife.rules;
 
-import model.GameOfLife.Cell;
+import model.Cell;
 import model.Rule;
 
-import static model.GameOfLife.Cell.State.DEAD;
-import static model.GameOfLife.Cell.State.LIVE;
 
-/**
- * If cell has <2 neighbours, cell dies
- */
+//1 is dead, 2 is live
 public class LackOfNeighboursRule implements Rule {
 
     @Override
     public void validate(Cell cell) {
         int activeNeighbours = 0;
         for (Cell neighbour: cell.getNeighbours()) {
-            if (neighbour.getState() == LIVE) {
+            if (neighbour.getState() == 2) {
                 activeNeighbours ++;
             }
         }
 
-        if (activeNeighbours<2) cell.setState(DEAD);
+        if (activeNeighbours<2) cell.setState(1);
     }
 }

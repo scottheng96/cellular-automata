@@ -18,8 +18,8 @@ public class BaseFrame {
 
     public BaseFrame(Collection<Square> cells) {
         borderBuffer = 100;
-        baseFrameX = 500;
-        baseFrameY = 500;
+        baseFrameX = 1000;
+        baseFrameY = 1000;
 
         f = new JFrame();
         for (Square square: cells) {
