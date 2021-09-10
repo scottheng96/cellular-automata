@@ -4,6 +4,8 @@ import model.GameOfLife.rules.DeadWithNeighboursRule;
 import model.GameOfLife.rules.LackOfNeighboursRule;
 import model.GameOfLife.rules.TooManyNeighboursRule;
 import model.GameOfLife.rules.TwoThreeNeighboursRule;
+import model.WarTor.FishMovementRule;
+import model.WarTor.SharkMovementRule;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -25,9 +27,16 @@ public class RuleSetFactory {
             myRules.add(lackOfNeighboursRule);
             myRules.add(tooManyNeighboursRule);
             myRules.add(twoThreeNeighboursRule);
-
-
         }
+
+        if (i==1) {
+            Rule fishMovementRule = new FishMovementRule();
+            Rule SharkMovementRule = new SharkMovementRule();
+
+            myRules.add(fishMovementRule);
+            myRules.add(SharkMovementRule);
+        }
+
         myRuleSet.setRules(myRules);
         return myRuleSet;
     }

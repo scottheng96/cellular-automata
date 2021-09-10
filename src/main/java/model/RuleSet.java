@@ -7,7 +7,6 @@ public class RuleSet {
     Set<Rule> rules;
 
     public RuleSet() {
-
     }
 
     public RuleSet(Set<Rule> rules) {

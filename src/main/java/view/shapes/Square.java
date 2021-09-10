@@ -1,7 +1,5 @@
 package view.shapes;
 
-import model.GameOfLife.Cell;
-
 import javax.swing.*;
 import java.awt.*;
 
