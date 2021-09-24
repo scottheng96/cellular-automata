@@ -11,6 +11,8 @@ public class Cell {
     public final int reproductionLife = 10;
     public final int food = 5;
 
+    public Cell() {};
+
     public Cell(int state) {
         this.state = state;
     }

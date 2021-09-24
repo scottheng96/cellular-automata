@@ -12,14 +12,14 @@ import java.util.Collection;
 */
 public class BaseFrame {
     int borderBuffer;
-    int baseFrameX;
-    int baseFrameY;
+    int baseX;
+    int baseY;
     JFrame f;
 
-    public BaseFrame(Collection<Square> cells) {
+    public BaseFrame(Collection<Square> cells, int baseX, int baseY) {
         borderBuffer = 100;
-        baseFrameX = 1000;
-        baseFrameY = 1000;
+        this.baseX = baseX;
+        this.baseY = baseY;
 
         f = new JFrame();
         for (Square square: cells) {
@@ -28,7 +28,7 @@ public class BaseFrame {
     }
 
     public void showFrame() {
-        f.setSize(baseFrameX,baseFrameY);
+        f.setSize(baseX,baseY);
         f.setLayout(null);
         f.setVisible(true);
     }

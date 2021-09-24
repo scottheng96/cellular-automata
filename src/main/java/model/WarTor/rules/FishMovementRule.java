@@ -1,4 +1,4 @@
-package model.WarTor;
+package model.WarTor.rules;
 
 import model.Cell;
 import model.Rule;
