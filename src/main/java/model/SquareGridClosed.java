@@ -83,9 +83,4 @@ public class SquareGridClosed extends AbstractGrid{
             cellArr[i].setNeighbours(neighbours);
         }
     }
-
-    public int getRow() {
-        return row;
-    }
-
 }
