@@ -35,10 +35,8 @@ public class CAController extends TimerTask {
         RuleSetFactory myRuleSetFactory = new RuleSetFactory();
         RuleSet myRuleSet = myRuleSetFactory.getRuleSet(i);
 
-        // state map TODO: make it another class
-        Map<Integer, Double> tempMap = new HashMap<Integer, Double>();
-        tempMap.put(1,0.4);
-        tempMap.put(2,0.6);
+        // state map
+        Map<Integer, Double> tempMap = MapUtil.getSimProbMap(i);
 
         // create model | based on game
         myModel = new SquareGridClosed(cellsPerRow,cellsPerColumn, tempMap, hasLife);
@@ -47,7 +45,7 @@ public class CAController extends TimerTask {
         myModel.setRuleSet(myRuleSet);
 
         // find colours for view | based on game
-        stateColorMap = stateColourMapUtil.getStateColourMap(i);
+        stateColorMap = MapUtil.getSimColourMap(i);
 
         // SETTING VIEW
 
