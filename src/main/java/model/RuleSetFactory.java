@@ -1,5 +1,7 @@
 package model;
 
+import model.Fire.rules.BurningRule;
+import model.Fire.rules.SpreadFireRule;
 import model.GameOfLife.rules.DeadWithNeighboursRule;
 import model.GameOfLife.rules.LackOfNeighboursRule;
 import model.GameOfLife.rules.TooManyNeighboursRule;
@@ -35,6 +37,14 @@ public class RuleSetFactory {
 
             myRules.add(fishMovementRule);
             myRules.add(SharkMovementRule);
+        }
+
+        if (i==2) {
+            Rule BurningRule = new BurningRule();
+            Rule SpreadingFireRule = new SpreadFireRule();
+
+            myRules.add(BurningRule);
+            myRules.add(SpreadingFireRule);
         }
 
         myRuleSet.setRules(myRules);

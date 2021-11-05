@@ -20,7 +20,6 @@ public class MapUtil {
         Properties prop = getSimProperties(i);
         Map<Integer, Color> colourMap = new HashMap<Integer, Color>();
         for (int state = 1; state < Integer.parseInt(prop.getProperty("states"))+1;state++) {
-            System.out.println(prop.getProperty(String.format("state.%s.colour", state)));
             colourMap.put(state, Color.decode(prop.getProperty(String.format("state.%s.colour", state))));
         }
         return colourMap;
@@ -40,9 +39,9 @@ public class MapUtil {
 
     private static Map<Integer, String> getPropertiesMap() {
         Map<Integer, String> propertiesMap = new HashMap<Integer, String>();
-        propertiesMap.put(1, "sim-gameoflife.properties");
-        propertiesMap.put(2, "sim-wartor.properties");
-        propertiesMap.put(3, "sim-fire.properties");
+        propertiesMap.put(0, "sim-gameoflife.properties");
+        propertiesMap.put(1, "sim-wartor.properties");
+        propertiesMap.put(2, "sim-fire.properties");
 
         return propertiesMap;
     }

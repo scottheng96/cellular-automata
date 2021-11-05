@@ -20,6 +20,8 @@ public class CAController extends TimerTask {
     public CAController(int i) {
         // i = 0 | Game Of Life
         // i = 1 | War-Tor
+        // i = 2 | Fire
+
         boolean hasLife = i==1;
 
         // load config
@@ -104,7 +106,7 @@ public class CAController extends TimerTask {
     private int countAlive() {
         int count = 0;
         for (Cell cell: myModel.getCells()) {
-            if (cell.getState() == 2) {
+            if (cell.getState() == 4) {
                 count += 1;
             }
         }

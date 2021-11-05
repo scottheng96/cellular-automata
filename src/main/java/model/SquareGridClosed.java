@@ -37,9 +37,7 @@ public class SquareGridClosed extends AbstractGrid{
 
         createNeighbours();
     }
-
-
-
+    
     public void createNeighbours() {
         Map<Cell,Set<Cell>> gridMap = new HashMap<Cell,Set<Cell>>();
 
